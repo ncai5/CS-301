@@ -1,0 +1,1312 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{main}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} project: p9}
+        \PY{c+c1}{\PYZsh{} submitter\PYZhy{}netid: hpan56}
+        \PY{c+c1}{\PYZsh{} partner\PYZhy{}netid: ncai5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{os}   
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{namedtuple}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{n}{directory}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{directory}\PY{p}{)}
+            \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{file}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                    \PY{k}{continue}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{file} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+            \PY{k}{if} \PY{n}{path} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                \PY{n}{filtered\PYZus{}path} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{if} \PY{n}{filetype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{filtered\PYZus{}path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{directory}\PY{p}{,} \PY{n}{file}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{file}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{in} \PY{n}{filetype}\PY{p}{:}
+                            \PY{n}{filtered\PYZus{}path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{directory}\PY{p}{,} \PY{n}{file}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{filtered\PYZus{}path} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{filtered\PYZus{}path}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                \PY{k}{return} \PY{n}{filtered\PYZus{}path}
+            \PY{k}{return} \PY{n}{file}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}q1}
+        \PY{n}{sample\PYZus{}data\PYZus{}file} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sample\PYZus{}data\PYZus{}file}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} ['2.json', '2.csv', '1.json', '1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}q2}
+        \PY{n}{path\PYZus{}q2} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{path\PYZus{}q2} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ['sample\_data\textbackslash{}\textbackslash{}2.json',
+         'sample\_data\textbackslash{}\textbackslash{}2.csv',
+         'sample\_data\textbackslash{}\textbackslash{}1.json',
+         'sample\_data\textbackslash{}\textbackslash{}1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}q3}
+        \PY{n}{path\PYZus{}q3} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{path\PYZus{}q3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} ['full\_data\textbackslash{}\textbackslash{}meta.info',
+         'full\_data\textbackslash{}\textbackslash{}agency\_info',
+         'full\_data\textbackslash{}\textbackslash{}5.json',
+         'full\_data\textbackslash{}\textbackslash{}5.csv',
+         'full\_data\textbackslash{}\textbackslash{}4.json',
+         'full\_data\textbackslash{}\textbackslash{}4.csv',
+         'full\_data\textbackslash{}\textbackslash{}3.json',
+         'full\_data\textbackslash{}\textbackslash{}3.csv',
+         'full\_data\textbackslash{}\textbackslash{}2.json',
+         'full\_data\textbackslash{}\textbackslash{}2.csv',
+         'full\_data\textbackslash{}\textbackslash{}1.json',
+         'full\_data\textbackslash{}\textbackslash{}1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}q4}
+        \PY{n}{path\PYZus{}q4} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{path\PYZus{}q4}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} ['sample\_data\textbackslash{}\textbackslash{}2.json',
+         'sample\_data\textbackslash{}\textbackslash{}2.csv',
+         'sample\_data\textbackslash{}\textbackslash{}1.json',
+         'sample\_data\textbackslash{}\textbackslash{}1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}q5}
+        \PY{n}{path\PYZus{}q5} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{path\PYZus{}q5}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} ['full\_data\textbackslash{}\textbackslash{}5.json',
+         'full\_data\textbackslash{}\textbackslash{}5.csv',
+         'full\_data\textbackslash{}\textbackslash{}4.json',
+         'full\_data\textbackslash{}\textbackslash{}4.csv',
+         'full\_data\textbackslash{}\textbackslash{}3.json',
+         'full\_data\textbackslash{}\textbackslash{}3.csv',
+         'full\_data\textbackslash{}\textbackslash{}2.json',
+         'full\_data\textbackslash{}\textbackslash{}2.csv',
+         'full\_data\textbackslash{}\textbackslash{}1.json',
+         'full\_data\textbackslash{}\textbackslash{}1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{Tweet} \PY{o}{=} \PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{username}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{file}\PY{p}{)}
+             \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{if} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{tweet\PYZus{}sub} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} 
+                                           \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{1000000}\PY{p}{,}\PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{elif} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{tweet\PYZus{}sub} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} 
+                                           \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{tweet\PYZus{}sub} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} 
+                                           \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{Tweet\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tweet\PYZus{}sub}\PY{p}{)}
+             \PY{k}{return} \PY{n}{Tweet\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}q6}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q6} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q6}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} [Tweet(tweet\_id='1467811372', username='USERID\_6', num\_liked=5882, length=29),
+          Tweet(tweet\_id='1467811592', username='USERID\_8', num\_liked=2676, length=11),
+          Tweet(tweet\_id='1467811594', username='USERID\_9', num\_liked=2182, length=99),
+          Tweet(tweet\_id='1467811795', username='USERID\_1', num\_liked=7791, length=36),
+          Tweet(tweet\_id='1467812025', username='USERID\_1', num\_liked=8149, length=25)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}q7}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q7} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q7}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} [Tweet(tweet\_id='1467812799', username='USERID\_7', num\_liked=3340, length=103),
+          Tweet(tweet\_id='1467812964', username='USERID\_10', num\_liked=3684, length=93),
+          Tweet(tweet\_id='1467813137', username='USERID\_5', num\_liked=6816, length=20),
+          Tweet(tweet\_id='1467813579', username='USERID\_1', num\_liked=1348, length=64),
+          Tweet(tweet\_id='1467813782', username='USERID\_1', num\_liked=4770, length=79)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}q8}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q8} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q8}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} [Tweet(tweet\_id='1467844540', username='USERID\_9', num\_liked=6366, length=49),
+          Tweet(tweet\_id='1467844907', username='USERID\_3', num\_liked=8770, length=42),
+          Tweet(tweet\_id='1467845095', username='USERID\_4', num\_liked=8567, length=126),
+          Tweet(tweet\_id='1467845157', username='USERID\_8', num\_liked=5761, length=17),
+          Tweet(tweet\_id='1467852031', username='USERID\_2', num\_liked=4565, length=63),
+          Tweet(tweet\_id='1467852067', username='USERID\_4', num\_liked=9594, length=34),
+          Tweet(tweet\_id='1467852789', username='USERID\_10', num\_liked=686, length=44),
+          Tweet(tweet\_id='1467853135', username='USERID\_1', num\_liked=6515, length=131),
+          Tweet(tweet\_id='1467853356', username='USERID\_10', num\_liked=3192, length=136),
+          Tweet(tweet\_id='1467853431', username='USERID\_10', num\_liked=9936, length=30),
+          Tweet(tweet\_id='1467853479', username='USERID\_9', num\_liked=4939, length=24),
+          Tweet(tweet\_id='1467854062', username='USERID\_10', num\_liked=9346, length=92),
+          Tweet(tweet\_id='1467854345', username='USERID\_9', num\_liked=7959, length=72),
+          Tweet(tweet\_id='1467854706', username='USERID\_1', num\_liked=8972, length=103),
+          Tweet(tweet\_id='1467854917', username='USERID\_2', num\_liked=7741, length=30),
+          Tweet(tweet\_id='1467855673', username='USERID\_9', num\_liked=9728, length=72),
+          Tweet(tweet\_id='1467855812', username='USERID\_2', num\_liked=4806, length=28),
+          Tweet(tweet\_id='1467855981', username='USERID\_2', num\_liked=6455, length=92),
+          Tweet(tweet\_id='1467856044', username='USERID\_7', num\_liked=1442, length=49),
+          Tweet(tweet\_id='1467856352', username='USERID\_3', num\_liked=523, length=20),
+          Tweet(tweet\_id='1467856426', username='USERID\_6', num\_liked=8675, length=99),
+          Tweet(tweet\_id='1467856497', username='USERID\_7', num\_liked=3105, length=79),
+          Tweet(tweet\_id='1467856632', username='USERID\_1', num\_liked=1724, length=43),
+          Tweet(tweet\_id='1467856821', username='USERID\_6', num\_liked=5145, length=80),
+          Tweet(tweet\_id='1467856919', username='USERID\_4', num\_liked=3887, length=61),
+          Tweet(tweet\_id='1467857221', username='USERID\_5', num\_liked=3589, length=102),
+          Tweet(tweet\_id='1467857297', username='USERID\_1', num\_liked=736, length=70),
+          Tweet(tweet\_id='1467857378', username='USERID\_4', num\_liked=9459, length=81),
+          Tweet(tweet\_id='1467857511', username='USERID\_7', num\_liked=3713, length=127),
+          Tweet(tweet\_id='1467857722', username='USERID\_8', num\_liked=9072, length=55),
+          Tweet(tweet\_id='1467857975', username='USERID\_9', num\_liked=4893, length=21),
+          Tweet(tweet\_id='1467858363', username='USERID\_10', num\_liked=4263, length=119),
+          Tweet(tweet\_id='1467858627', username='USERID\_3', num\_liked=8400, length=120),
+          Tweet(tweet\_id='1467858869', username='USERID\_10', num\_liked=1609, length=48),
+          Tweet(tweet\_id='1467859025', username='USERID\_4', num\_liked=5618, length=81),
+          Tweet(tweet\_id='1467859066', username='USERID\_9', num\_liked=99, length=53),
+          Tweet(tweet\_id='1467859408', username='USERID\_5', num\_liked=2878, length=128),
+          Tweet(tweet\_id='1467859436', username='USERID\_7', num\_liked=8001, length=67),
+          Tweet(tweet\_id='1467859558', username='USERID\_1', num\_liked=8732, length=136),
+          Tweet(tweet\_id='1467859666', username='USERID\_9', num\_liked=9158, length=16),
+          Tweet(tweet\_id='1467859820', username='USERID\_10', num\_liked=7921, length=27),
+          Tweet(tweet\_id='1467859922', username='USERID\_6', num\_liked=3955, length=120),
+          Tweet(tweet\_id='1467860895', username='USERID\_1', num\_liked=2055, length=18),
+          Tweet(tweet\_id='1467860904', username='USERID\_7', num\_liked=9851, length=30),
+          Tweet(tweet\_id='1467861095', username='USERID\_10', num\_liked=7191, length=38),
+          Tweet(tweet\_id='1467861522', username='USERID\_1', num\_liked=2742, length=70),
+          Tweet(tweet\_id='1467861571', username='USERID\_1', num\_liked=7095, length=84),
+          Tweet(tweet\_id='1467862213', username='USERID\_2', num\_liked=2455, length=138),
+          Tweet(tweet\_id='1467862313', username='USERID\_10', num\_liked=3256, length=127),
+          Tweet(tweet\_id='1467862355', username='USERID\_3', num\_liked=4110, length=53)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}q9}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q9} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q9}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} [Tweet(tweet\_id='1467876711', username='USERID\_10', num\_liked=1117, length=84),
+          Tweet(tweet\_id='1467877496', username='USERID\_1', num\_liked=2062, length=106),
+          Tweet(tweet\_id='1467877833', username='USERID\_2', num\_liked=4270, length=89),
+          Tweet(tweet\_id='1467877865', username='USERID\_1', num\_liked=5899, length=30),
+          Tweet(tweet\_id='1467878057', username='USERID\_6', num\_liked=703, length=42),
+          Tweet(tweet\_id='1467878557', username='USERID\_6', num\_liked=5814, length=61),
+          Tweet(tweet\_id='1467878633', username='USERID\_2', num\_liked=2351, length=33),
+          Tweet(tweet\_id='1467878971', username='USERID\_2', num\_liked=2238, length=27),
+          Tweet(tweet\_id='1467878983', username='USERID\_8', num\_liked=4860, length=61),
+          Tweet(tweet\_id='1467879480', username='USERID\_4', num\_liked=1345, length=97),
+          Tweet(tweet\_id='1467879984', username='USERID\_2', num\_liked=3694, length=69),
+          Tweet(tweet\_id='1467880085', username='USERID\_4', num\_liked=2478, length=120),
+          Tweet(tweet\_id='1467880431', username='USERID\_3', num\_liked=9407, length=85),
+          Tweet(tweet\_id='1467880442', username='USERID\_2', num\_liked=5125, length=96),
+          Tweet(tweet\_id='1467880463', username='USERID\_9', num\_liked=1226, length=29),
+          Tweet(tweet\_id='1467880692', username='USERID\_6', num\_liked=4989, length=49),
+          Tweet(tweet\_id='1467881131', username='USERID\_10', num\_liked=732, length=107),
+          Tweet(tweet\_id='1467881373', username='USERID\_6', num\_liked=8615, length=145),
+          Tweet(tweet\_id='1467881376', username='USERID\_4', num\_liked=4378, length=49),
+          Tweet(tweet\_id='1467881457', username='USERID\_7', num\_liked=119, length=27),
+          Tweet(tweet\_id='1467881686', username='USERID\_5', num\_liked=8136, length=46),
+          Tweet(tweet\_id='1467881809', username='USERID\_4', num\_liked=1797, length=138),
+          Tweet(tweet\_id='1467881897', username='USERID\_5', num\_liked=2314, length=76),
+          Tweet(tweet\_id='1467881920', username='USERID\_3', num\_liked=4101, length=112),
+          Tweet(tweet\_id='1467882140', username='USERID\_8', num\_liked=5320, length=137),
+          Tweet(tweet\_id='1467882491', username='USERID\_10', num\_liked=3512, length=55),
+          Tweet(tweet\_id='1467882592', username='USERID\_10', num\_liked=1887, length=67),
+          Tweet(tweet\_id='1467882902', username='USERID\_3', num\_liked=4646, length=48),
+          Tweet(tweet\_id='1467888679', username='USERID\_8', num\_liked=3089, length=27),
+          Tweet(tweet\_id='1467888732', username='USERID\_7', num\_liked=2800, length=48),
+          Tweet(tweet\_id='1467888953', username='USERID\_3', num\_liked=3951, length=46),
+          Tweet(tweet\_id='1467889231', username='USERID\_5', num\_liked=1320, length=79),
+          Tweet(tweet\_id='1467889334', username='USERID\_5', num\_liked=8495, length=42),
+          Tweet(tweet\_id='1467889574', username='USERID\_1', num\_liked=4696, length=123),
+          Tweet(tweet\_id='1467889791', username='USERID\_5', num\_liked=4027, length=132),
+          Tweet(tweet\_id='1467889988', username='USERID\_2', num\_liked=7394, length=51),
+          Tweet(tweet\_id='1467890079', username='USERID\_8', num\_liked=2556, length=38),
+          Tweet(tweet\_id='1467890222', username='USERID\_2', num\_liked=227, length=107),
+          Tweet(tweet\_id='1467890723', username='USERID\_1', num\_liked=96, length=134),
+          Tweet(tweet\_id='1467891826', username='USERID\_9', num\_liked=2021, length=113),
+          Tweet(tweet\_id='1467891880', username='USERID\_7', num\_liked=6847, length=96),
+          Tweet(tweet\_id='1467892075', username='USERID\_6', num\_liked=2816, length=124),
+          Tweet(tweet\_id='1467892515', username='USERID\_5', num\_liked=917, length=39),
+          Tweet(tweet\_id='1467892667', username='USERID\_2', num\_liked=8270, length=20),
+          Tweet(tweet\_id='1467892720', username='USERID\_3', num\_liked=3227, length=128)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                     \PY{n}{data} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                     \PY{k}{if} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{tweet} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{username}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{1000000}\PY{p}{,} 
+                                       \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{elif} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{tweet} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{username}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{1000}\PY{p}{,} 
+                                       \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{elif} \PY{n+nb}{type}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str}\PY{p}{:}
+                         \PY{n}{tweet} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{username}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} 
+                                       \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{elif} \PY{n+nb}{type}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{n+nb}{int}\PY{p}{:}
+                         \PY{n}{tweet} \PY{o}{=} \PY{n}{Tweet}\PY{p}{(}\PY{n}{tweet\PYZus{}id} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{username}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{num\PYZus{}liked} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}liked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}    
+                     \PY{n}{Tweet\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{Tweet\PYZus{}list}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{Tweet\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}q10}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q10} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sample\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q10}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} [Tweet(tweet\_id='1467810369', username='USERID\_4', num\_liked=315, length=115),
+          Tweet(tweet\_id='1467810672', username='USERID\_8', num\_liked=5298, length=111),
+          Tweet(tweet\_id='1467810917', username='USERID\_8', num\_liked=533, length=89),
+          Tweet(tweet\_id='1467811184', username='USERID\_6', num\_liked=2650, length=47),
+          Tweet(tweet\_id='1467811193', username='USERID\_8', num\_liked=2101, length=111)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}q11}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q11} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sample\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q11}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} [Tweet(tweet\_id='1467812416', username='USERID\_9', num\_liked=5278, length=43),
+          Tweet(tweet\_id='1467812579', username='USERID\_1', num\_liked=9700, length=26),
+          Tweet(tweet\_id='1467812723', username='USERID\_3', num\_liked=5414, length=94),
+          Tweet(tweet\_id='1467812771', username='USERID\_8', num\_liked=2190, length=77),
+          Tweet(tweet\_id='1467812784', username='USERID\_10', num\_liked=2667, length=117)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}q12}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q12} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{full\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q12}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} [Tweet(tweet\_id='1467944581', username='USERID\_1', num\_liked=7216, length=131),
+          Tweet(tweet\_id='1467944654', username='USERID\_7', num\_liked=2838, length=59),
+          Tweet(tweet\_id='1467944871', username='USERID\_1', num\_liked=9393, length=51),
+          Tweet(tweet\_id='1467945476', username='USERID\_10', num\_liked=9246, length=33),
+          Tweet(tweet\_id='1467945704', username='USERID\_1', num\_liked=526, length=62),
+          Tweet(tweet\_id='1467945787', username='USERID\_9', num\_liked=8850, length=81),
+          Tweet(tweet\_id='1467945885', username='USERID\_4', num\_liked=9403, length=67),
+          Tweet(tweet\_id='1467946026', username='USERID\_1', num\_liked=2861, length=69),
+          Tweet(tweet\_id='1467946137', username='USERID\_1', num\_liked=5470, length=135),
+          Tweet(tweet\_id='1467946559', username='USERID\_6', num\_liked=987, length=116),
+          Tweet(tweet\_id='1467946592', username='USERID\_3', num\_liked=9085, length=137),
+          Tweet(tweet\_id='1467946749', username='USERID\_4', num\_liked=3381, length=42),
+          Tweet(tweet\_id='1467946810', username='USERID\_4', num\_liked=5338, length=62),
+          Tweet(tweet\_id='1467947005', username='USERID\_7', num\_liked=6974, length=53),
+          Tweet(tweet\_id='1467947104', username='USERID\_6', num\_liked=5847, length=24),
+          Tweet(tweet\_id='1467947557', username='USERID\_9', num\_liked=8449, length=110),
+          Tweet(tweet\_id='1467947713', username='USERID\_7', num\_liked=7444, length=140),
+          Tweet(tweet\_id='1467947913', username='USERID\_2', num\_liked=8578, length=36),
+          Tweet(tweet\_id='1467948169', username='USERID\_1', num\_liked=4545, length=33),
+          Tweet(tweet\_id='1467948434', username='USERID\_9', num\_liked=770, length=53),
+          Tweet(tweet\_id='1467948521', username='USERID\_4', num\_liked=8276, length=100),
+          Tweet(tweet\_id='1467948526', username='USERID\_3', num\_liked=7010, length=64),
+          Tweet(tweet\_id='1467948979', username='USERID\_10', num\_liked=9209, length=93),
+          Tweet(tweet\_id='1467949047', username='USERID\_3', num\_liked=7231, length=30),
+          Tweet(tweet\_id='1467949516', username='USERID\_3', num\_liked=4787, length=104),
+          Tweet(tweet\_id='1467949681', username='USERID\_5', num\_liked=5318, length=36),
+          Tweet(tweet\_id='1467949746', username='USERID\_8', num\_liked=4383, length=8),
+          Tweet(tweet\_id='1467949969', username='USERID\_3', num\_liked=1177, length=80),
+          Tweet(tweet\_id='1467950027', username='USERID\_10', num\_liked=8575, length=26),
+          Tweet(tweet\_id='1467950029', username='USERID\_1', num\_liked=7362, length=119),
+          Tweet(tweet\_id='1467950217', username='USERID\_7', num\_liked=1241, length=63),
+          Tweet(tweet\_id='1467950510', username='USERID\_7', num\_liked=5002, length=34),
+          Tweet(tweet\_id='1467950588', username='USERID\_4', num\_liked=589, length=63),
+          Tweet(tweet\_id='1467950600', username='USERID\_3', num\_liked=5951, length=71),
+          Tweet(tweet\_id='1467950649', username='USERID\_7', num\_liked=9449, length=46),
+          Tweet(tweet\_id='1467950687', username='USERID\_3', num\_liked=3464, length=70),
+          Tweet(tweet\_id='1467950866', username='USERID\_4', num\_liked=122, length=27),
+          Tweet(tweet\_id='1467950975', username='USERID\_3', num\_liked=6793, length=74),
+          Tweet(tweet\_id='1467951016', username='USERID\_5', num\_liked=7795, length=80),
+          Tweet(tweet\_id='1467951035', username='USERID\_9', num\_liked=3477, length=114),
+          Tweet(tweet\_id='1467951252', username='USERID\_2', num\_liked=7515, length=48),
+          Tweet(tweet\_id='1467951422', username='USERID\_6', num\_liked=2520, length=98),
+          Tweet(tweet\_id='1467951568', username='USERID\_8', num\_liked=39, length=98),
+          Tweet(tweet\_id='1467951850', username='USERID\_8', num\_liked=1170, length=29),
+          Tweet(tweet\_id='1467951931', username='USERID\_4', num\_liked=5320, length=81),
+          Tweet(tweet\_id='1467952069', username='USERID\_7', num\_liked=399, length=24),
+          Tweet(tweet\_id='1467952100', username='USERID\_1', num\_liked=2754, length=69),
+          Tweet(tweet\_id='1467952123', username='USERID\_9', num\_liked=9222, length=137),
+          Tweet(tweet\_id='1467952985', username='USERID\_4', num\_liked=6256, length=118),
+          Tweet(tweet\_id='1467953090', username='USERID\_2', num\_liked=1896, length=64)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}q13}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q13} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{full\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tweet\PYZus{}list\PYZus{}q13}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{search\PYZus{}id}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{id\PYZus{}num}\PY{p}{)}\PY{p}{:}
+             \PY{n}{files} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{n}{directory} \PY{o}{=} \PY{n}{path}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{files}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Tweet\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{id\PYZus{}num} \PY{o+ow}{in} \PY{n}{Tweet\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{:}
+                         \PY{k}{return} \PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}q14}
+         \PY{n}{file\PYZus{}q14} \PY{o}{=} \PY{n}{search\PYZus{}id}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1467813137}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{file\PYZus{}q14}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 'sample\_data\textbackslash{}\textbackslash{}2.csv'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}q15}
+         \PY{n}{file\PYZus{}q15} \PY{o}{=} \PY{n}{search\PYZus{}id}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1467862937}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{file\PYZus{}q15}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}q16}
+         \PY{n}{file\PYZus{}q16} \PY{o}{=} \PY{n}{search\PYZus{}id}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1467907751}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{file\PYZus{}q16}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 'full\_data\textbackslash{}\textbackslash{}3.csv'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{search\PYZus{}user}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{user}\PY{p}{)}\PY{p}{:}
+             \PY{n}{files} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{n}{directory} \PY{o}{=} \PY{n}{path}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{users} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{files}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{Tweet\PYZus{}list} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Tweet\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{user} \PY{o+ow}{in} \PY{n}{Tweet\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{users}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                         \PY{k}{break}
+             \PY{k}{return} \PY{n}{users}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}q17}
+         \PY{n}{file\PYZus{}q17} \PY{o}{=} \PY{n}{search\PYZus{}user}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USERID\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{file\PYZus{}q17}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} ['sample\_data\textbackslash{}\textbackslash{}2.json', 'sample\_data\textbackslash{}\textbackslash{}2.csv', 'sample\_data\textbackslash{}\textbackslash{}1.csv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{getTweet}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{:}
+             \PY{n}{files} \PY{o}{=} \PY{n}{file\PYZus{}path\PYZus{}filter}\PY{p}{(}\PY{n}{directory} \PY{o}{=} \PY{n}{path}\PY{p}{,} \PY{n}{path} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{filetype} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{tweet\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{files}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{tweet\PYZus{}list} \PY{o}{=} \PY{n}{tweet\PYZus{}list} \PY{o}{+} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{tweet\PYZus{}list} \PY{o}{=} \PY{n}{tweet\PYZus{}list} \PY{o}{+} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tweet\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}q18}
+         \PY{n}{tweet\PYZus{}q18} \PY{o}{=} \PY{n}{getTweet}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{tweet\PYZus{}q18}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{Tweet}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{Tweet}\PY{o}{.}\PY{n}{tweet\PYZus{}id}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} [Tweet(tweet\_id='1467810369', username='USERID\_4', num\_liked=315, length=115),
+          Tweet(tweet\_id='1467810672', username='USERID\_8', num\_liked=5298, length=111),
+          Tweet(tweet\_id='1467810917', username='USERID\_8', num\_liked=533, length=89),
+          Tweet(tweet\_id='1467811184', username='USERID\_6', num\_liked=2650, length=47),
+          Tweet(tweet\_id='1467811193', username='USERID\_8', num\_liked=2101, length=111),
+          Tweet(tweet\_id='1467811372', username='USERID\_6', num\_liked=5882, length=29),
+          Tweet(tweet\_id='1467811592', username='USERID\_8', num\_liked=2676, length=11),
+          Tweet(tweet\_id='1467811594', username='USERID\_9', num\_liked=2182, length=99),
+          Tweet(tweet\_id='1467811795', username='USERID\_1', num\_liked=7791, length=36),
+          Tweet(tweet\_id='1467812025', username='USERID\_1', num\_liked=8149, length=25),
+          Tweet(tweet\_id='1467812416', username='USERID\_9', num\_liked=5278, length=43),
+          Tweet(tweet\_id='1467812579', username='USERID\_1', num\_liked=9700, length=26),
+          Tweet(tweet\_id='1467812723', username='USERID\_3', num\_liked=5414, length=94),
+          Tweet(tweet\_id='1467812771', username='USERID\_8', num\_liked=2190, length=77),
+          Tweet(tweet\_id='1467812784', username='USERID\_10', num\_liked=2667, length=117),
+          Tweet(tweet\_id='1467812799', username='USERID\_7', num\_liked=3340, length=103),
+          Tweet(tweet\_id='1467812964', username='USERID\_10', num\_liked=3684, length=93),
+          Tweet(tweet\_id='1467813137', username='USERID\_5', num\_liked=6816, length=20),
+          Tweet(tweet\_id='1467813579', username='USERID\_1', num\_liked=1348, length=64),
+          Tweet(tweet\_id='1467813782', username='USERID\_1', num\_liked=4770, length=79)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{}q19}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{tweet\PYZus{}q18}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{Tweet}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{Tweet}\PY{o}{.}\PY{n}{num\PYZus{}liked}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} [Tweet(tweet\_id='1467812579', username='USERID\_1', num\_liked=9700, length=26),
+          Tweet(tweet\_id='1467812025', username='USERID\_1', num\_liked=8149, length=25),
+          Tweet(tweet\_id='1467811795', username='USERID\_1', num\_liked=7791, length=36),
+          Tweet(tweet\_id='1467813137', username='USERID\_5', num\_liked=6816, length=20),
+          Tweet(tweet\_id='1467811372', username='USERID\_6', num\_liked=5882, length=29),
+          Tweet(tweet\_id='1467812723', username='USERID\_3', num\_liked=5414, length=94),
+          Tweet(tweet\_id='1467810672', username='USERID\_8', num\_liked=5298, length=111),
+          Tweet(tweet\_id='1467812416', username='USERID\_9', num\_liked=5278, length=43),
+          Tweet(tweet\_id='1467813782', username='USERID\_1', num\_liked=4770, length=79),
+          Tweet(tweet\_id='1467812964', username='USERID\_10', num\_liked=3684, length=93),
+          Tweet(tweet\_id='1467812799', username='USERID\_7', num\_liked=3340, length=103),
+          Tweet(tweet\_id='1467811592', username='USERID\_8', num\_liked=2676, length=11),
+          Tweet(tweet\_id='1467812784', username='USERID\_10', num\_liked=2667, length=117),
+          Tweet(tweet\_id='1467811184', username='USERID\_6', num\_liked=2650, length=47),
+          Tweet(tweet\_id='1467812771', username='USERID\_8', num\_liked=2190, length=77),
+          Tweet(tweet\_id='1467811594', username='USERID\_9', num\_liked=2182, length=99),
+          Tweet(tweet\_id='1467811193', username='USERID\_8', num\_liked=2101, length=111),
+          Tweet(tweet\_id='1467813579', username='USERID\_1', num\_liked=1348, length=64),
+          Tweet(tweet\_id='1467810917', username='USERID\_8', num\_liked=533, length=89),
+          Tweet(tweet\_id='1467810369', username='USERID\_4', num\_liked=315, length=115)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}q20}
+         \PY{n}{tweet\PYZus{}q20} \PY{o}{=} \PY{n}{getTweet}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{tweet\PYZus{}q20}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{Tweet}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{Tweet}\PY{o}{.}\PY{n}{num\PYZus{}liked}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} [Tweet(tweet\_id='1467894593', username='USERID\_2', num\_liked=869000000, length=136),
+          Tweet(tweet\_id='1467894600', username='USERID\_8', num\_liked=915000, length=67),
+          Tweet(tweet\_id='1467853431', username='USERID\_10', num\_liked=9936, length=30),
+          Tweet(tweet\_id='1467875163', username='USERID\_2', num\_liked=9891, length=69),
+          Tweet(tweet\_id='1467860904', username='USERID\_7', num\_liked=9851, length=30),
+          Tweet(tweet\_id='1467928014', username='USERID\_7', num\_liked=9830, length=18),
+          Tweet(tweet\_id='1467895048', username='USERID\_10', num\_liked=9822, length=136),
+          Tweet(tweet\_id='1467966646', username='USERID\_7', num\_liked=9821, length=47),
+          Tweet(tweet\_id='1467855673', username='USERID\_9', num\_liked=9728, length=72),
+          Tweet(tweet\_id='1467898078', username='USERID\_10', num\_liked=9705, length=104),
+          Tweet(tweet\_id='1467928300', username='USERID\_9', num\_liked=9681, length=79),
+          Tweet(tweet\_id='1467917177', username='USERID\_3', num\_liked=9678, length=105),
+          Tweet(tweet\_id='1467923235', username='USERID\_9', num\_liked=9662, length=134),
+          Tweet(tweet\_id='1467964211', username='USERID\_4', num\_liked=9618, length=79),
+          Tweet(tweet\_id='1467873980', username='USERID\_5', num\_liked=9608, length=88),
+          Tweet(tweet\_id='1467852067', username='USERID\_4', num\_liked=9594, length=34),
+          Tweet(tweet\_id='1467863633', username='USERID\_9', num\_liked=9549, length=95),
+          Tweet(tweet\_id='1467953733', username='USERID\_4', num\_liked=9526, length=67),
+          Tweet(tweet\_id='1467862806', username='USERID\_2', num\_liked=9465, length=68),
+          Tweet(tweet\_id='1467954070', username='USERID\_8', num\_liked=9462, length=64)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}q21}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{tweet\PYZus{}q20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} 445
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}q22}
+         \PY{n}{users\PYZus{}q22} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tweet\PYZus{}q20}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{username} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{users\PYZus{}q22}\PY{p}{:}
+                 \PY{n}{users\PYZus{}q22}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{)}
+         \PY{n}{users\PYZus{}q22} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{users\PYZus{}q22}\PY{p}{)}
+         \PY{n}{users\PYZus{}q22}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} \{'USERID\_1',
+          'USERID\_10',
+          'USERID\_2',
+          'USERID\_3',
+          'USERID\_4',
+          'USERID\_5',
+          'USERID\_6',
+          'USERID\_7',
+          'USERID\_8',
+          'USERID\_9'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}q23}
+         \PY{n}{user\PYZus{}prolific} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tweet\PYZus{}q20}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{username} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{user\PYZus{}prolific}\PY{p}{:}
+                 \PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{user\PYZus{}prolific}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} \{'USERID\_1': 52,
+          'USERID\_7': 55,
+          'USERID\_10': 45,
+          'USERID\_9': 44,
+          'USERID\_4': 35,
+          'USERID\_6': 51,
+          'USERID\_3': 39,
+          'USERID\_2': 47,
+          'USERID\_5': 46,
+          'USERID\_8': 31\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}q24}
+         \PY{n}{user\PYZus{}total\PYZus{}like} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{user\PYZus{}popular} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tweet\PYZus{}q20}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{username} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{user\PYZus{}total\PYZus{}like}\PY{p}{:}
+                 \PY{n}{user\PYZus{}total\PYZus{}like}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{num\PYZus{}liked}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{user\PYZus{}total\PYZus{}like}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{num\PYZus{}liked}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{user\PYZus{}total\PYZus{}like}\PY{p}{:}
+             \PY{n}{user\PYZus{}popular}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}total\PYZus{}like}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{/} \PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+         \PY{n}{user\PYZus{}popular}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} \{'USERID\_1': 4369.115384615385,
+          'USERID\_7': 5079.436363636363,
+          'USERID\_10': 5728.777777777777,
+          'USERID\_9': 5334.386363636364,
+          'USERID\_4': 4578.8,
+          'USERID\_6': 4559.588235294118,
+          'USERID\_3': 5023.820512820513,
+          'USERID\_2': 18494258.80851064,
+          'USERID\_5': 4583.130434782609,
+          'USERID\_8': 34463.45161290323\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}q25}
+         \PY{n}{user\PYZus{}total\PYZus{}len} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{user\PYZus{}verbose} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tweet\PYZus{}q20}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{username} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{user\PYZus{}total\PYZus{}len}\PY{p}{:}
+                 \PY{n}{user\PYZus{}total\PYZus{}len}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{length}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{user\PYZus{}total\PYZus{}len}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{username}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{length}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{user\PYZus{}total\PYZus{}len}\PY{p}{:}
+             \PY{n}{user\PYZus{}verbose}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}total\PYZus{}len}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{/} \PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+         \PY{n}{user\PYZus{}verbose}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} \{'USERID\_1': 81.86538461538461,
+          'USERID\_7': 72.96363636363637,
+          'USERID\_10': 72.71111111111111,
+          'USERID\_9': 78.36363636363636,
+          'USERID\_4': 73.91428571428571,
+          'USERID\_6': 73.68627450980392,
+          'USERID\_3': 67.15384615384616,
+          'USERID\_2': 79.51063829787235,
+          'USERID\_5': 73.69565217391305,
+          'USERID\_8': 73.96774193548387\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{def} \PY{n+nf}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{please label me!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{please label me!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{x}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{y}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{xlim}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{xlabel}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{ylabel}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}scientific}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}scientific}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{number\PYZus{}tweets} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{average\PYZus{}length} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{average\PYZus{}likes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{user\PYZus{}verbose}\PY{p}{:}
+             \PY{n}{average\PYZus{}length}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{user\PYZus{}verbose}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{number\PYZus{}tweets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{average\PYZus{}likes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{user\PYZus{}popular}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}q26}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{number\PYZus{}tweets}\PY{p}{,} \PY{n}{average\PYZus{}length}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Tweets}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}q27}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{number\PYZus{}tweets}\PY{p}{,} \PY{n}{average\PYZus{}likes}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Tweets}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Likes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}q28}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{average\PYZus{}length}\PY{p}{,} \PY{n}{average\PYZus{}likes}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Likes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{}q29}
+         \PY{n}{user\PYZus{}q29} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{user\PYZus{}popular}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{user\PYZus{}popular}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{user\PYZus{}popular}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{user\PYZus{}q29}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 'USERID\_2'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{}q30}
+         \PY{n}{user2\PYZus{}tweet} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tweet\PYZus{}q20}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{username} \PY{o}{==} \PY{n}{user\PYZus{}q29}\PY{p}{:}
+                 \PY{n}{user2\PYZus{}tweet}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+         \PY{n}{user2\PYZus{}tweet} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{user2\PYZus{}tweet}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{num\PYZus{}liked}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{user2\PYZus{}tweet}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} [Tweet(tweet\_id='1467894593', username='USERID\_2', num\_liked=869000000, length=136),
+          Tweet(tweet\_id='1467875163', username='USERID\_2', num\_liked=9891, length=69),
+          Tweet(tweet\_id='1467862806', username='USERID\_2', num\_liked=9465, length=68),
+          Tweet(tweet\_id='1467907751', username='USERID\_2', num\_liked=9048, length=110),
+          Tweet(tweet\_id='1467928764', username='USERID\_2', num\_liked=9026, length=41),
+          Tweet(tweet\_id='1467943007', username='USERID\_2', num\_liked=9000, length=130),
+          Tweet(tweet\_id='1467918682', username='USERID\_2', num\_liked=8884, length=102),
+          Tweet(tweet\_id='1467935121', username='USERID\_2', num\_liked=8740, length=37),
+          Tweet(tweet\_id='1467947913', username='USERID\_2', num\_liked=8578, length=36),
+          Tweet(tweet\_id='1467892667', username='USERID\_2', num\_liked=8270, length=20),
+          Tweet(tweet\_id='1467897316', username='USERID\_2', num\_liked=7890, length=64),
+          Tweet(tweet\_id='1467854917', username='USERID\_2', num\_liked=7741, length=30),
+          Tweet(tweet\_id='1467961106', username='USERID\_2', num\_liked=7552, length=65),
+          Tweet(tweet\_id='1467951252', username='USERID\_2', num\_liked=7515, length=48),
+          Tweet(tweet\_id='1467889988', username='USERID\_2', num\_liked=7394, length=51),
+          Tweet(tweet\_id='1467916959', username='USERID\_2', num\_liked=7081, length=69),
+          Tweet(tweet\_id='1467874916', username='USERID\_2', num\_liked=6935, length=23),
+          Tweet(tweet\_id='1467855981', username='USERID\_2', num\_liked=6455, length=92),
+          Tweet(tweet\_id='1467872247', username='USERID\_2', num\_liked=6316, length=137),
+          Tweet(tweet\_id='1467918850', username='USERID\_2', num\_liked=5383, length=103),
+          Tweet(tweet\_id='1467919055', username='USERID\_2', num\_liked=5370, length=68),
+          Tweet(tweet\_id='1467915670', username='USERID\_2', num\_liked=5287, length=138),
+          Tweet(tweet\_id='1467880442', username='USERID\_2', num\_liked=5125, length=96),
+          Tweet(tweet\_id='1467896253', username='USERID\_2', num\_liked=4906, length=91),
+          Tweet(tweet\_id='1467962897', username='USERID\_2', num\_liked=4898, length=98),
+          Tweet(tweet\_id='1467855812', username='USERID\_2', num\_liked=4806, length=28),
+          Tweet(tweet\_id='1467930220', username='USERID\_2', num\_liked=4770, length=94),
+          Tweet(tweet\_id='1467852031', username='USERID\_2', num\_liked=4565, length=63),
+          Tweet(tweet\_id='1467905378', username='USERID\_2', num\_liked=4420, length=111),
+          Tweet(tweet\_id='1467877833', username='USERID\_2', num\_liked=4270, length=89),
+          Tweet(tweet\_id='1467870866', username='USERID\_2', num\_liked=4166, length=82),
+          Tweet(tweet\_id='1467879984', username='USERID\_2', num\_liked=3694, length=69),
+          Tweet(tweet\_id='1467898511', username='USERID\_2', num\_liked=3477, length=99),
+          Tweet(tweet\_id='1467926632', username='USERID\_2', num\_liked=2602, length=98),
+          Tweet(tweet\_id='1467862213', username='USERID\_2', num\_liked=2455, length=138),
+          Tweet(tweet\_id='1467878633', username='USERID\_2', num\_liked=2351, length=33),
+          Tweet(tweet\_id='1467878971', username='USERID\_2', num\_liked=2238, length=27),
+          Tweet(tweet\_id='1467953090', username='USERID\_2', num\_liked=1896, length=64),
+          Tweet(tweet\_id='1467908798', username='USERID\_2', num\_liked=1659, length=51),
+          Tweet(tweet\_id='1467918015', username='USERID\_2', num\_liked=1508, length=97),
+          Tweet(tweet\_id='1467926444', username='USERID\_2', num\_liked=1394, length=61),
+          Tweet(tweet\_id='1467914499', username='USERID\_2', num\_liked=910, length=138),
+          Tweet(tweet\_id='1467968584', username='USERID\_2', num\_liked=777, length=132),
+          Tweet(tweet\_id='1467933102', username='USERID\_2', num\_liked=625, length=135),
+          Tweet(tweet\_id='1467953277', username='USERID\_2', num\_liked=494, length=31),
+          Tweet(tweet\_id='1467890222', username='USERID\_2', num\_liked=227, length=107),
+          Tweet(tweet\_id='1467871956', username='USERID\_2', num\_liked=110, length=68)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{}q31}
+         \PY{n}{total\PYZus{}q31} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{user2\PYZus{}tweet}\PY{p}{:}
+             \PY{n}{total\PYZus{}q31} \PY{o}{+}\PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{num\PYZus{}liked}
+         \PY{n}{user2\PYZus{}tweet}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{num\PYZus{}liked} \PY{o}{/} \PY{n}{total\PYZus{}q31} \PY{o}{*} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} 99.97352093731529
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{}q32}
+         \PY{p}{(}\PY{n}{user\PYZus{}popular}\PY{p}{[}\PY{n}{user\PYZus{}q29}\PY{p}{]} \PY{o}{*} \PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{user\PYZus{}q29}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{user2\PYZus{}tweet}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{num\PYZus{}liked}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{user\PYZus{}prolific}\PY{p}{[}\PY{n}{user\PYZus{}q29}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} 5003.565217391304
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{def} \PY{n+nf}{list\PYZus{}files}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{:}
+             \PY{n}{path\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{path\PYZus{}dir} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{list\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{path}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{list\PYZus{}dir}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isfile}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                         \PY{n}{path\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{elif} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{path\PYZus{}dir}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{path\PYZus{}dir}\PY{p}{:}
+                 \PY{n}{path\PYZus{}list} \PY{o}{=} \PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{n}{path\PYZus{}list}
+             \PY{k}{return} \PY{n}{path\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{}q33}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{play}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} ['play\textbackslash{}\textbackslash{}rb\textbackslash{}\textbackslash{}rb9\textbackslash{}\textbackslash{}89.csv', 'play\textbackslash{}\textbackslash{}rb\textbackslash{}\textbackslash{}rb9\textbackslash{}\textbackslash{}12.xls']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}q34}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{play}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} ['play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}qwe\textbackslash{}\textbackslash{}usun.pdf',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}qwe\textbackslash{}\textbackslash{}iuqwe.json',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}mf.py',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}lu.txt']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}q35}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{play}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ou}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} ['play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}v',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}uikwe',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}qonxu.txt',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}aoq\textbackslash{}\textbackslash{}qsonj',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}aoq\textbackslash{}\textbackslash{}aqnsa',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}b',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}a']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}q36}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{play}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} ['play\textbackslash{}\textbackslash{}rb\textbackslash{}\textbackslash{}rb9\textbackslash{}\textbackslash{}89.csv',
+          'play\textbackslash{}\textbackslash{}rb\textbackslash{}\textbackslash{}rb9\textbackslash{}\textbackslash{}12.xls',
+          'play\textbackslash{}\textbackslash{}rb\textbackslash{}\textbackslash{}ppt.ppt',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}v',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}uikwe',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}qonxu.txt',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}aoq\textbackslash{}\textbackslash{}qsonj',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}quap\textbackslash{}\textbackslash{}aoq\textbackslash{}\textbackslash{}aqnsa',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}b',
+          'play\textbackslash{}\textbackslash{}ou\textbackslash{}\textbackslash{}a',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}qwe\textbackslash{}\textbackslash{}usun.pdf',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}qwe\textbackslash{}\textbackslash{}iuqwe.json',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}mf.py',
+          'play\textbackslash{}\textbackslash{}ls\textbackslash{}\textbackslash{}lu.txt']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}q37}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recursive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{others}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} ['recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_9.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_8.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_7.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_6.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_5.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_10.json']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{}q38}
+         \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{list\PYZus{}files}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recursive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} ['recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_9.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_8.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_7.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_6.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_5.json',
+          'recursive\textbackslash{}\textbackslash{}others\textbackslash{}\textbackslash{}USERID\_10.json',
+          'recursive\textbackslash{}\textbackslash{}USERID\_4\textbackslash{}\textbackslash{}true\textbackslash{}\textbackslash{}tweets.json',
+          'recursive\textbackslash{}\textbackslash{}USERID\_4\textbackslash{}\textbackslash{}false\textbackslash{}\textbackslash{}tweets.json',
+          'recursive\textbackslash{}\textbackslash{}USERID\_3\textbackslash{}\textbackslash{}tweets.json',
+          'recursive\textbackslash{}\textbackslash{}USERID\_2\textbackslash{}\textbackslash{}tweets.json',
+          'recursive\textbackslash{}\textbackslash{}USERID\_1\textbackslash{}\textbackslash{}tweets.json']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{}q39}
+         \PY{n}{path\PYZus{}q39} \PY{o}{=} \PY{n}{list\PYZus{}files}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recursive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USERID\PYZus{}4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Tweet\PYZus{}q39} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{path\PYZus{}q39}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{tweet\PYZus{}q39} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{tweet\PYZus{}q39} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{n}{Tweet\PYZus{}q39} \PY{o}{=} \PY{n}{tweet\PYZus{}q39} \PY{o}{+} \PY{n}{Tweet\PYZus{}q39}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{Tweet\PYZus{}q39}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} 17
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{}q40}
+         \PY{n}{path\PYZus{}q40} \PY{o}{=} \PY{n}{list\PYZus{}files}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recursive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Tweet\PYZus{}q40} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{path\PYZus{}q40}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{tweet\PYZus{}q40} \PY{o}{=} \PY{n}{getTweet\PYZus{}json}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{tweet\PYZus{}q40} \PY{o}{=} \PY{n}{getTweet\PYZus{}csv}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{n}{Tweet\PYZus{}q40} \PY{o}{=} \PY{n}{tweet\PYZus{}q40} \PY{o}{+} \PY{n}{Tweet\PYZus{}q40}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{Tweet\PYZus{}q40}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} 200
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
