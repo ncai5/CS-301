@@ -1,0 +1,1792 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{main}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} project: p10}
+        \PY{c+c1}{\PYZsh{} submitter\PYZhy{}netid: hpan56}
+        \PY{c+c1}{\PYZsh{} partner\PYZhy{}netid: ncai5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{requests}\PY{o}{,} \PY{n+nn}{json}\PY{o}{,} \PY{n+nn}{os}\PY{o}{,} \PY{n+nn}{math}\PY{o}{,} \PY{n+nn}{sqlite3}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}q1}
+        \PY{n}{url\PYZus{}q1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://tyler.caraza\PYZhy{}harter.com/cs301/spring19/data/countries.json}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{countries} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{n}{url\PYZus{}q1}\PY{p}{)}
+        \PY{n}{countries}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 127493303
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}q2}
+        \PY{n}{url\PYZus{}q2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://tyler.caraza\PYZhy{}harter.com/cs301/spring19/data/capitals/manifest.txt}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{mannifest} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url\PYZus{}q2}\PY{p}{)}
+        \PY{n}{mannifest} \PY{o}{=} \PY{n}{mannifest}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{mannifest}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 'Brazil\_Peru.json'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}json}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{p}{:}
+            \PY{n}{filename} \PY{o}{=} \PY{n}{url}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+                \PY{n}{file} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+                \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                    \PY{n}{json}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+                \PY{k}{return} \PY{n}{file}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                    \PY{n}{file} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+                \PY{k}{return} \PY{n}{file}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{capital\PYZus{}rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{mannifest}\PY{p}{:}
+            \PY{n}{path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://tyler.caraza\PYZhy{}harter.com/cs301/spring19/data/capitals/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{i}
+            \PY{n}{capital\PYZus{}rows} \PY{o}{=} \PY{n}{capital\PYZus{}rows} \PY{o}{+} \PY{n}{get\PYZus{}json}\PY{p}{(}\PY{n}{path}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}q3}
+        \PY{n}{capital\PYZus{}rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} [\{'capital': 'Brasilia',
+          'country': 'Brazil',
+          'latitude': -15.783333333333333,
+          'longitude': -47.916667\},
+         \{'capital': 'Nouakchott',
+          'country': 'Mauritania',
+          'latitude': 18.066666666666666,
+          'longitude': -15.966667000000001\},
+         \{'capital': 'Bern',
+          'country': 'Switzerland',
+          'latitude': 46.91666666666666,
+          'longitude': 7.466667\},
+         \{'capital': 'Zagreb',
+          'country': 'Croatia',
+          'latitude': 45.8,
+          'longitude': 16.0\},
+         \{'capital': 'Cairo',
+          'country': 'Egypt',
+          'latitude': 30.05,
+          'longitude': 31.25\},
+         \{'capital': 'Sanaa',
+          'country': 'Yemen',
+          'latitude': 15.35,
+          'longitude': 44.2\},
+         \{'capital': 'Helsinki',
+          'country': 'Finland',
+          'latitude': 60.16666666666666,
+          'longitude': 24.933332999999998\},
+         \{'capital': 'Addis Ababa',
+          'country': 'Ethiopia',
+          'latitude': 9.033333333333333,
+          'longitude': 38.7\},
+         \{'capital': 'Prague',
+          'country': 'Czech Republic',
+          'latitude': 50.08333333333334,
+          'longitude': 14.466667000000001\},
+         \{'capital': 'Maseru',
+          'country': 'Lesotho',
+          'latitude': -29.316666666666666,
+          'longitude': 27.483333000000002\},
+         \{'capital': 'Antananarivo',
+          'country': 'Madagascar',
+          'latitude': -18.916666666666668,
+          'longitude': 47.516667\},
+         \{'capital': 'Ashgabat',
+          'country': 'Turkmenistan',
+          'latitude': 37.95,
+          'longitude': 58.38333299999999\},
+         \{'capital': 'Tashkent',
+          'country': 'Uzbekistan',
+          'latitude': 41.31666666666667,
+          'longitude': 69.25\},
+         \{'capital': 'Kingstown',
+          'country': 'Saint Vincent and the Grenadines',
+          'latitude': 13.133333333333333,
+          'longitude': -61.216667\},
+         \{'capital': 'Roseau',
+          'country': 'Dominica',
+          'latitude': 15.3,
+          'longitude': -61.4\},
+         \{'capital': 'Tunis',
+          'country': 'Tunisia',
+          'latitude': 36.8,
+          'longitude': 10.183333\},
+         \{'capital': 'Niamey',
+          'country': 'Niger',
+          'latitude': 13.516666666666667,
+          'longitude': 2.1166669999999996\},
+         \{'capital': 'Dublin',
+          'country': 'Ireland',
+          'latitude': 53.31666666666667,
+          'longitude': -6.233333\},
+         \{'capital': 'Port-au-Prince',
+          'country': 'Haiti',
+          'latitude': 18.53333333333333,
+          'longitude': -72.333333\},
+         \{'capital': 'Lima',
+          'country': 'Peru',
+          'latitude': -12.05,
+          'longitude': -77.05\},
+         \{'capital': 'San Salvador',
+          'country': 'El Salvador',
+          'latitude': 13.7,
+          'longitude': -89.2\},
+         \{'capital': 'Sofia',
+          'country': 'Bulgaria',
+          'latitude': 42.68333333333333,
+          'longitude': 23.316667000000002\},
+         \{'capital': 'Guatemala City',
+          'country': 'Guatemala',
+          'latitude': 14.616666666666667,
+          'longitude': -90.516667\},
+         \{'capital': 'Rabat',
+          'country': 'Morocco',
+          'latitude': 34.016666666666666,
+          'longitude': -6.816667\},
+         \{'capital': 'Brussels',
+          'country': 'Belgium',
+          'latitude': 50.83333333333334,
+          'longitude': 4.3333330000000005\},
+         \{'capital': 'Ankara',
+          'country': 'Turkey',
+          'latitude': 39.93333333333333,
+          'longitude': 32.866667\},
+         \{'capital': 'Wellington',
+          'country': 'New Zealand',
+          'latitude': -41.3,
+          'longitude': 174.783333\},
+         \{'capital': 'George Town',
+          'country': 'Cayman Islands',
+          'latitude': 19.3,
+          'longitude': -81.383333\},
+         \{'capital': 'Tripoli',
+          'country': 'Libya',
+          'latitude': 32.88333333333333,
+          'longitude': 13.166667000000002\},
+         \{'capital': "Nuku'alofa",
+          'country': 'Tonga',
+          'latitude': -21.133333333333333,
+          'longitude': -175.2\},
+         \{'capital': 'Yaounde',
+          'country': 'Cameroon',
+          'latitude': 3.8666666666666663,
+          'longitude': 11.516667\},
+         \{'capital': 'Luxembourg',
+          'country': 'Luxembourg',
+          'latitude': 49.6,
+          'longitude': 6.116667\},
+         \{'capital': 'Kigali',
+          'country': 'Rwanda',
+          'latitude': -1.95,
+          'longitude': 30.05\},
+         \{'capital': 'Panama City',
+          'country': 'Panama',
+          'latitude': 8.966666666666667,
+          'longitude': -79.533333\},
+         \{'capital': 'Phnom Penh',
+          'country': 'Cambodia',
+          'latitude': 11.55,
+          'longitude': 104.91666699999999\},
+         \{'capital': 'Kyiv',
+          'country': 'Ukraine',
+          'latitude': 50.43333333333333,
+          'longitude': 30.516666999999998\},
+         \{'capital': 'Asmara',
+          'country': 'Eritrea',
+          'latitude': 15.333333333333336,
+          'longitude': 38.933333000000005\},
+         \{'capital': 'Amman',
+          'country': 'Jordan',
+          'latitude': 31.95,
+          'longitude': 35.933333000000005\},
+         \{'capital': 'Algiers',
+          'country': 'Algeria',
+          'latitude': 36.75,
+          'longitude': 3.05\},
+         \{'capital': 'Jamestown',
+          'country': 'Saint Helena',
+          'latitude': -15.933333333333335,
+          'longitude': -5.716667\},
+         \{'capital': 'Accra',
+          'country': 'Ghana',
+          'latitude': 5.55,
+          'longitude': -0.216667\},
+         \{'capital': 'Georgetown',
+          'country': 'Guyana',
+          'latitude': 6.8,
+          'longitude': -58.15\},
+         \{'capital': 'London',
+          'country': 'United Kingdom',
+          'latitude': 51.5,
+          'longitude': -0.083333\},
+         \{'capital': 'Suva',
+          'country': 'Fiji',
+          'latitude': -18.133333333333333,
+          'longitude': 178.416667\},
+         \{'capital': 'Djibouti',
+          'country': 'Djibouti',
+          'latitude': 11.583333333333336,
+          'longitude': 43.15\},
+         \{'capital': 'Thimphu',
+          'country': 'Bhutan',
+          'latitude': 27.466666666666665,
+          'longitude': 89.633333\},
+         \{'capital': 'Oslo',
+          'country': 'Norway',
+          'latitude': 59.91666666666666,
+          'longitude': 10.75\},
+         \{'capital': 'Bissau',
+          'country': 'Guinea-Bissau',
+          'latitude': 11.85,
+          'longitude': -15.583332999999998\},
+         \{'capital': 'The Valley',
+          'country': 'Anguilla',
+          'latitude': 18.216666666666665,
+          'longitude': -63.05\},
+         \{'capital': 'Damascus',
+          'country': 'Syria',
+          'latitude': 33.5,
+          'longitude': 36.3\},
+         \{'capital': 'Tehran',
+          'country': 'Iran',
+          'latitude': 35.7,
+          'longitude': 51.416667\},
+         \{'capital': 'Vientiane',
+          'country': 'Laos',
+          'latitude': 17.966666666666665,
+          'longitude': 102.6\},
+         \{'capital': 'Malabo',
+          'country': 'Equatorial Guinea',
+          'latitude': 3.75,
+          'longitude': 8.783333\},
+         \{'capital': 'Abu Dhabi',
+          'country': 'United Arab Emirates',
+          'latitude': 24.466666666666665,
+          'longitude': 54.36666700000001\},
+         \{'capital': 'Monrovia',
+          'country': 'Liberia',
+          'latitude': 6.3,
+          'longitude': -10.8\},
+         \{'capital': 'Washington D.C.',
+          'country': 'United States',
+          'latitude': 38.883333,
+          'longitude': -77.0\},
+         \{'capital': 'Santo Domingo',
+          'country': 'Dominican Republic',
+          'latitude': 18.466666666666665,
+          'longitude': -69.9\},
+         \{'capital': 'Praia',
+          'country': 'Cape Verde',
+          'latitude': 14.916666666666664,
+          'longitude': -23.516667\},
+         \{'capital': 'Chisinau',
+          'country': 'Moldova',
+          'latitude': 47.0,
+          'longitude': 28.85\},
+         \{'capital': 'Belmopan',
+          'country': 'Belize',
+          'latitude': 17.25,
+          'longitude': -88.766667\},
+         \{'capital': 'Melekeok',
+          'country': 'Palau',
+          'latitude': 7.4833333333333325,
+          'longitude': 134.633333\},
+         \{'capital': 'Baghdad',
+          'country': 'Iraq',
+          'latitude': 33.333333333333336,
+          'longitude': 44.4\},
+         \{'capital': 'Majuro',
+          'country': 'Marshall Islands',
+          'latitude': 7.1,
+          'longitude': 171.383333\},
+         \{'capital': 'Muscat',
+          'country': 'Oman',
+          'latitude': 23.61666666666667,
+          'longitude': 58.583332999999996\},
+         \{'capital': 'Kabul',
+          'country': 'Afghanistan',
+          'latitude': 34.516666666666666,
+          'longitude': 69.18333299999999\},
+         \{'capital': 'Paramaribo',
+          'country': 'Suriname',
+          'latitude': 5.833333333333332,
+          'longitude': -55.166667000000004\},
+         \{'capital': 'Reykjavik',
+          'country': 'Iceland',
+          'latitude': 64.15,
+          'longitude': -21.95\},
+         \{'capital': 'Madrid',
+          'country': 'Spain',
+          'latitude': 40.4,
+          'longitude': -3.683333\},
+         \{'capital': 'Athens',
+          'country': 'Greece',
+          'latitude': 37.98333333333333,
+          'longitude': 23.733333\},
+         \{'capital': 'Beijing',
+          'country': 'China',
+          'latitude': 39.91666666666666,
+          'longitude': 116.38333300000001\},
+         \{'capital': 'Tokyo',
+          'country': 'Japan',
+          'latitude': 35.68333333333333,
+          'longitude': 139.75\},
+         \{'capital': 'Noumea',
+          'country': 'New Caledonia',
+          'latitude': -22.266666666666666,
+          'longitude': 166.45\},
+         \{'capital': 'San Jose',
+          'country': 'Costa Rica',
+          'latitude': 9.933333333333334,
+          'longitude': -84.083333\},
+         \{'capital': 'Lusaka',
+          'country': 'Zambia',
+          'latitude': -15.416666666666664,
+          'longitude': 28.283333000000002\},
+         \{'capital': 'Abuja',
+          'country': 'Nigeria',
+          'latitude': 9.083333333333334,
+          'longitude': 7.533333\},
+         \{'capital': 'Lisbon',
+          'country': 'Portugal',
+          'latitude': 38.71666666666667,
+          'longitude': -9.133333\},
+         \{'capital': 'Bogota',
+          'country': 'Colombia',
+          'latitude': 4.6,
+          'longitude': -74.083333\},
+         \{'capital': 'Taipei',
+          'country': 'Taiwan',
+          'latitude': 25.03333333333333,
+          'longitude': 121.516667\},
+         \{'capital': 'Bujumbura',
+          'country': 'Burundi',
+          'latitude': -3.3666666666666667,
+          'longitude': 29.35\},
+         \{'capital': 'Montevideo',
+          'country': 'Uruguay',
+          'latitude': -34.85,
+          'longitude': -56.166667000000004\},
+         \{'capital': 'Gaborone',
+          'country': 'Botswana',
+          'latitude': -24.63333333333333,
+          'longitude': 25.9\},
+         \{'capital': 'Riga',
+          'country': 'Latvia',
+          'latitude': 56.95,
+          'longitude': 24.1\},
+         \{'capital': 'Baku',
+          'country': 'Azerbaijan',
+          'latitude': 40.38333333333333,
+          'longitude': 49.866667\},
+         \{'capital': 'Papeete',
+          'country': 'French Polynesia',
+          'latitude': -17.533333333333335,
+          'longitude': -149.566667\},
+         \{'capital': 'Ouagadougou',
+          'country': 'Burkina Faso',
+          'latitude': 12.366666666666667,
+          'longitude': -1.516667\},
+         \{'capital': 'Hanoi',
+          'country': 'Vietnam',
+          'latitude': 21.03333333333333,
+          'longitude': 105.85\},
+         \{'capital': 'Male',
+          'country': 'Maldives',
+          'latitude': 4.166666666666667,
+          'longitude': 73.5\},
+         \{'capital': 'Moroni',
+          'country': 'Comoros',
+          'latitude': -11.7,
+          'longitude': 43.233333\},
+         \{'capital': 'Porto-Novo',
+          'country': 'Benin',
+          'latitude': 6.4833333333333325,
+          'longitude': 2.6166669999999996\},
+         \{'capital': 'Ottawa',
+          'country': 'Canada',
+          'latitude': 45.41666666666666,
+          'longitude': -75.7\},
+         \{'capital': 'Stockholm',
+          'country': 'Sweden',
+          'latitude': 59.33333333333334,
+          'longitude': 18.05\},
+         \{'capital': 'Singapore',
+          'country': 'Singapore',
+          'latitude': 1.2833333333333332,
+          'longitude': 103.85\},
+         \{'capital': 'Windhoek',
+          'country': 'Namibia',
+          'latitude': -22.566666666666666,
+          'longitude': 17.083333\},
+         \{'capital': 'Dhaka',
+          'country': 'Bangladesh',
+          'latitude': 23.716666666666665,
+          'longitude': 90.4\},
+         \{'capital': 'Mogadishu',
+          'country': 'Somalia',
+          'latitude': 2.066666666666667,
+          'longitude': 45.333333\},
+         \{'capital': 'Victoria',
+          'country': 'Seychelles',
+          'latitude': -4.616666666666667,
+          'longitude': 55.45\},
+         \{'capital': 'Rome',
+          'country': 'Italy',
+          'latitude': 41.9,
+          'longitude': 12.483333\},
+         \{'capital': 'Vaduz',
+          'country': 'Liechtenstein',
+          'latitude': 47.13333333333333,
+          'longitude': 9.516667\},
+         \{'capital': 'Maputo',
+          'country': 'Mozambique',
+          'latitude': -25.95,
+          'longitude': 32.583333\},
+         \{'capital': 'Libreville',
+          'country': 'Gabon',
+          'latitude': 0.38333333333333336,
+          'longitude': 9.45\},
+         \{'capital': 'Dakar',
+          'country': 'Senegal',
+          'latitude': 14.733333333333333,
+          'longitude': -17.633333\},
+         \{'capital': 'Port Louis',
+          'country': 'Mauritius',
+          'latitude': -20.15,
+          'longitude': 57.483332999999995\},
+         \{'capital': 'Bridgetown',
+          'country': 'Barbados',
+          'latitude': 13.1,
+          'longitude': -59.61666700000001\},
+         \{'capital': 'Ulaanbaatar',
+          'country': 'Mongolia',
+          'latitude': 47.91666666666666,
+          'longitude': 106.91666699999999\},
+         \{'capital': 'Tbilisi',
+          'country': 'Georgia',
+          'latitude': 41.68333333333333,
+          'longitude': 44.833333\},
+         \{'capital': "Saint George's",
+          'country': 'Grenada',
+          'latitude': 12.05,
+          'longitude': -61.75\},
+         \{'capital': 'Tegucigalpa',
+          'country': 'Honduras',
+          'latitude': 14.1,
+          'longitude': -87.216667\},
+         \{'capital': 'Castries',
+          'country': 'Saint Lucia',
+          'latitude': 14.0,
+          'longitude': -61.0\},
+         \{'capital': 'Hamilton',
+          'country': 'Bermuda',
+          'latitude': 32.28333333333333,
+          'longitude': -64.783333\},
+         \{'capital': 'Kampala',
+          'country': 'Uganda',
+          'latitude': 0.31666666666666665,
+          'longitude': 32.55\},
+         \{'capital': 'Riyadh',
+          'country': 'Saudi Arabia',
+          'latitude': 24.65,
+          'longitude': 46.7\},
+         \{'capital': 'Bishkek',
+          'country': 'Kyrgyzstan',
+          'latitude': 42.86666666666667,
+          'longitude': 74.6\},
+         \{'capital': 'San Juan',
+          'country': 'Puerto Rico',
+          'latitude': 18.466666666666665,
+          'longitude': -66.116667\},
+         \{'capital': 'Vienna',
+          'country': 'Austria',
+          'latitude': 48.2,
+          'longitude': 16.366667\},
+         \{'capital': 'Havana',
+          'country': 'Cuba',
+          'latitude': 23.11666666666667,
+          'longitude': -82.35\},
+         \{'capital': 'Ljubljana',
+          'country': 'Slovenia',
+          'latitude': 46.05,
+          'longitude': 14.516667000000002\},
+         \{'capital': 'Moscow',
+          'country': 'Russia',
+          'latitude': 55.75,
+          'longitude': 37.6\},
+         \{'capital': 'Kuala Lumpur',
+          'country': 'Malaysia',
+          'latitude': 3.1666666666666665,
+          'longitude': 101.7\},
+         \{'capital': 'Amsterdam',
+          'country': 'Netherlands',
+          'latitude': 52.35,
+          'longitude': 4.9166669999999995\},
+         \{'capital': 'Oranjestad',
+          'country': 'Aruba',
+          'latitude': 12.516666666666667,
+          'longitude': -70.033333\},
+         \{'capital': 'Santiago',
+          'country': 'Chile',
+          'latitude': -33.45,
+          'longitude': -70.666667\},
+         \{'capital': 'Warsaw',
+          'country': 'Poland',
+          'latitude': 52.25,
+          'longitude': 21.0\},
+         \{'capital': 'Caracas',
+          'country': 'Venezuela',
+          'latitude': 10.483333333333333,
+          'longitude': -66.866667\},
+         \{'capital': 'Manila',
+          'country': 'Philippines',
+          'latitude': 14.6,
+          'longitude': 120.96666699999999\},
+         \{'capital': 'Manama',
+          'country': 'Bahrain',
+          'latitude': 26.23333333333333,
+          'longitude': 50.566666999999995\},
+         \{'capital': 'Conakry',
+          'country': 'Guinea',
+          'latitude': 9.5,
+          'longitude': -13.7\},
+         \{'capital': 'Harare',
+          'country': 'Zimbabwe',
+          'latitude': -17.816666666666666,
+          'longitude': 31.033333000000002\},
+         \{'capital': 'La Paz',
+          'country': 'Bolivia',
+          'latitude': -16.5,
+          'longitude': -68.15\},
+         \{'capital': 'Kuwait City',
+          'country': 'Kuwait',
+          'latitude': 29.36666666666667,
+          'longitude': 47.966667\},
+         \{'capital': 'Budapest',
+          'country': 'Hungary',
+          'latitude': 47.5,
+          'longitude': 19.083333\},
+         \{'capital': 'Jerusalem',
+          'country': 'Israel',
+          'latitude': 31.766666666666666,
+          'longitude': 35.233333\},
+         \{'capital': 'Paris',
+          'country': 'France',
+          'latitude': 48.86666666666667,
+          'longitude': 2.333333\},
+         \{'capital': 'Tirana',
+          'country': 'Albania',
+          'latitude': 41.31666666666667,
+          'longitude': 19.816667000000002\},
+         \{'capital': 'Yerevan',
+          'country': 'Armenia',
+          'latitude': 40.16666666666666,
+          'longitude': 44.5\},
+         \{'capital': 'Tallinn',
+          'country': 'Estonia',
+          'latitude': 59.43333333333333,
+          'longitude': 24.716667\},
+         \{'capital': 'Dar es Salaam',
+          'country': 'Tanzania',
+          'latitude': -6.8,
+          'longitude': 39.283333\},
+         \{'capital': 'Quito',
+          'country': 'Ecuador',
+          'latitude': -0.21666666666666667,
+          'longitude': -78.5\},
+         \{'capital': 'Copenhagen',
+          'country': 'Denmark',
+          'latitude': 55.66666666666666,
+          'longitude': 12.583333\},
+         \{'capital': 'Bucharest',
+          'country': 'Romania',
+          'latitude': 44.43333333333333,
+          'longitude': 26.1\},
+         \{'capital': 'Lome',
+          'country': 'Togo',
+          'latitude': 6.116666666666666,
+          'longitude': 1.216667\},
+         \{'capital': 'Vilnius',
+          'country': 'Lithuania',
+          'latitude': 54.68333333333333,
+          'longitude': 25.316667000000002\},
+         \{'capital': 'Bangkok',
+          'country': 'Thailand',
+          'latitude': 13.75,
+          'longitude': 100.516667\},
+         \{'capital': 'Kingston',
+          'country': 'Jamaica',
+          'latitude': 18.0,
+          'longitude': -76.8\},
+         \{'capital': 'Mexico City',
+          'country': 'Mexico',
+          'latitude': 19.433333333333334,
+          'longitude': -99.133333\},
+         \{'capital': 'Berlin',
+          'country': 'Germany',
+          'latitude': 52.51666666666666,
+          'longitude': 13.4\},
+         \{'capital': 'New Delhi',
+          'country': 'India',
+          'latitude': 28.6,
+          'longitude': 77.2\},
+         \{'capital': 'Managua',
+          'country': 'Nicaragua',
+          'latitude': 12.133333333333333,
+          'longitude': -86.25\},
+         \{'capital': 'Colombo',
+          'country': 'Sri Lanka',
+          'latitude': 6.916666666666668,
+          'longitude': 79.833333\},
+         \{'capital': 'Hagatna',
+          'country': 'Guam',
+          'latitude': 13.466666666666667,
+          'longitude': 144.73333300000002\},
+         \{'capital': 'Nairobi',
+          'country': 'Kenya',
+          'latitude': -1.2833333333333332,
+          'longitude': 36.816666999999995\},
+         \{'capital': 'Buenos Aires',
+          'country': 'Argentina',
+          'latitude': -34.583333333333336,
+          'longitude': -58.666667000000004\},
+         \{'capital': 'Khartoum',
+          'country': 'Sudan',
+          'latitude': 15.6,
+          'longitude': 32.533333\},
+         \{'capital': 'Canberra',
+          'country': 'Australia',
+          'latitude': -35.266666666666666,
+          'longitude': 149.133333\},
+         \{'capital': 'Doha',
+          'country': 'Qatar',
+          'latitude': 25.28333333333333,
+          'longitude': 51.533333\},
+         \{'capital': 'Mbabane',
+          'country': 'Swaziland',
+          'latitude': -26.316666666666666,
+          'longitude': 31.133333\},
+         \{'capital': 'Port-Vila',
+          'country': 'Vanuatu',
+          'latitude': -17.733333333333334,
+          'longitude': 168.316667\},
+         \{'capital': 'Port Moresby',
+          'country': 'Papua New Guinea',
+          'latitude': -9.45,
+          'longitude': 147.183333\},
+         \{'capital': 'Apia',
+          'country': 'Samoa',
+          'latitude': -13.816666666666665,
+          'longitude': -171.76666699999998\},
+         \{'capital': 'Bamako',
+          'country': 'Mali',
+          'latitude': 12.65,
+          'longitude': -8.0\},
+         \{'capital': 'Kathmandu',
+          'country': 'Nepal',
+          'latitude': 27.716666666666665,
+          'longitude': 85.31666700000001\},
+         \{'capital': "N'Djamena",
+          'country': 'Chad',
+          'latitude': 12.1,
+          'longitude': 15.033332999999999\},
+         \{'capital': 'San Marino',
+          'country': 'San Marino',
+          'latitude': 43.93333333333333,
+          'longitude': 12.416667\},
+         \{'capital': 'Astana',
+          'country': 'Kazakhstan',
+          'latitude': 51.16666666666666,
+          'longitude': 71.416667\},
+         \{'capital': 'Minsk',
+          'country': 'Belarus',
+          'latitude': 53.9,
+          'longitude': 27.566667\},
+         \{'capital': 'Monaco',
+          'country': 'Monaco',
+          'latitude': 43.73333333333333,
+          'longitude': 7.4166669999999995\},
+         \{'capital': 'Pretoria',
+          'country': 'South Africa',
+          'latitude': -25.7,
+          'longitude': 28.216666999999998\},
+         \{'capital': 'Valletta',
+          'country': 'Malta',
+          'latitude': 35.88333333333333,
+          'longitude': 14.5\},
+         \{'capital': 'Lilongwe',
+          'country': 'Malawi',
+          'latitude': -13.966666666666667,
+          'longitude': 33.783333\},
+         \{'capital': 'Freetown',
+          'country': 'Sierra Leone',
+          'latitude': 8.483333333333333,
+          'longitude': -13.233332999999998\},
+         \{'capital': 'Yamoussoukro',
+          'country': "Cote d'Ivoire",
+          'latitude': 6.816666666666666,
+          'longitude': -5.266667\},
+         \{'capital': 'Islamabad',
+          'country': 'Pakistan',
+          'latitude': 33.68333333333333,
+          'longitude': 73.05\},
+         \{'capital': 'Beirut',
+          'country': 'Lebanon',
+          'latitude': 33.86666666666667,
+          'longitude': 35.5\},
+         \{'capital': 'Asuncion',
+          'country': 'Paraguay',
+          'latitude': -25.266666666666666,
+          'longitude': -57.666667000000004\},
+         \{'capital': 'Jakarta',
+          'country': 'Indonesia',
+          'latitude': -6.166666666666668,
+          'longitude': 106.816667\},
+         \{'capital': 'Dushanbe',
+          'country': 'Tajikistan',
+          'latitude': 38.55,
+          'longitude': 68.766667\}]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{capitals} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{capital\PYZus{}rows}\PY{p}{)}
+        \PY{n}{capitals}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}             capital                           country   latitude   longitude
+        0          Brasilia                            Brazil -15.783333  -47.916667
+        1        Nouakchott                        Mauritania  18.066667  -15.966667
+        2              Bern                       Switzerland  46.916667    7.466667
+        3            Zagreb                           Croatia  45.800000   16.000000
+        4             Cairo                             Egypt  30.050000   31.250000
+        5             Sanaa                             Yemen  15.350000   44.200000
+        6          Helsinki                           Finland  60.166667   24.933333
+        7       Addis Ababa                          Ethiopia   9.033333   38.700000
+        8            Prague                    Czech Republic  50.083333   14.466667
+        9            Maseru                           Lesotho -29.316667   27.483333
+        10     Antananarivo                        Madagascar -18.916667   47.516667
+        11         Ashgabat                      Turkmenistan  37.950000   58.383333
+        12         Tashkent                        Uzbekistan  41.316667   69.250000
+        13        Kingstown  Saint Vincent and the Grenadines  13.133333  -61.216667
+        14           Roseau                          Dominica  15.300000  -61.400000
+        15            Tunis                           Tunisia  36.800000   10.183333
+        16           Niamey                             Niger  13.516667    2.116667
+        17           Dublin                           Ireland  53.316667   -6.233333
+        18   Port-au-Prince                             Haiti  18.533333  -72.333333
+        19             Lima                              Peru -12.050000  -77.050000
+        20     San Salvador                       El Salvador  13.700000  -89.200000
+        21            Sofia                          Bulgaria  42.683333   23.316667
+        22   Guatemala City                         Guatemala  14.616667  -90.516667
+        23            Rabat                           Morocco  34.016667   -6.816667
+        24         Brussels                           Belgium  50.833333    4.333333
+        25           Ankara                            Turkey  39.933333   32.866667
+        26       Wellington                       New Zealand -41.300000  174.783333
+        27      George Town                    Cayman Islands  19.300000  -81.383333
+        28          Tripoli                             Libya  32.883333   13.166667
+        29       Nuku'alofa                             Tonga -21.133333 -175.200000
+        ..              {\ldots}                               {\ldots}        {\ldots}         {\ldots}
+        145       New Delhi                             India  28.600000   77.200000
+        146         Managua                         Nicaragua  12.133333  -86.250000
+        147         Colombo                         Sri Lanka   6.916667   79.833333
+        148         Hagatna                              Guam  13.466667  144.733333
+        149         Nairobi                             Kenya  -1.283333   36.816667
+        150    Buenos Aires                         Argentina -34.583333  -58.666667
+        151        Khartoum                             Sudan  15.600000   32.533333
+        152        Canberra                         Australia -35.266667  149.133333
+        153            Doha                             Qatar  25.283333   51.533333
+        154         Mbabane                         Swaziland -26.316667   31.133333
+        155       Port-Vila                           Vanuatu -17.733333  168.316667
+        156    Port Moresby                  Papua New Guinea  -9.450000  147.183333
+        157            Apia                             Samoa -13.816667 -171.766667
+        158          Bamako                              Mali  12.650000   -8.000000
+        159       Kathmandu                             Nepal  27.716667   85.316667
+        160       N'Djamena                              Chad  12.100000   15.033333
+        161      San Marino                        San Marino  43.933333   12.416667
+        162          Astana                        Kazakhstan  51.166667   71.416667
+        163           Minsk                           Belarus  53.900000   27.566667
+        164          Monaco                            Monaco  43.733333    7.416667
+        165        Pretoria                      South Africa -25.700000   28.216667
+        166        Valletta                             Malta  35.883333   14.500000
+        167        Lilongwe                            Malawi -13.966667   33.783333
+        168        Freetown                      Sierra Leone   8.483333  -13.233333
+        169    Yamoussoukro                     Cote d'Ivoire   6.816667   -5.266667
+        170       Islamabad                          Pakistan  33.683333   73.050000
+        171          Beirut                           Lebanon  33.866667   35.500000
+        172        Asuncion                          Paraguay -25.266667  -57.666667
+        173         Jakarta                         Indonesia  -6.166667  106.816667
+        174        Dushanbe                        Tajikistan  38.550000   68.766667
+        
+        [175 rows x 4 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}q4}
+        \PY{n}{capitals}\PY{p}{[}\PY{n}{capitals}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bermuda}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{iat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 'Hamilton'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}q5}
+         \PY{n}{capitals}\PY{p}{[}\PY{n}{capitals}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{capital}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Maputo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{iat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 'Mozambique'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}q6}
+         \PY{n}{capital\PYZus{}q6} \PY{o}{=} \PY{n}{capitals}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{capital\PYZus{}q6} \PY{o}{=} \PY{n}{capital\PYZus{}q6}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{list}\PY{p}{(}\PY{n}{capital\PYZus{}q6}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} ['New Zealand', 'Australia', 'Uruguay', 'Argentina', 'Chile']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}q7}
+         \PY{n}{capital\PYZus{}q7} \PY{o}{=} \PY{n}{capitals}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{capital\PYZus{}q7} \PY{o}{=} \PY{n}{capital\PYZus{}q7}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n+nb}{list}\PY{p}{(}\PY{n}{capital\PYZus{}q7}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} ['Iceland', 'Finland', 'Norway']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}q8}
+         \PY{n}{countries}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{birth\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{death\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}        birth-rate  death-rate
+         count  175.000000  175.000000
+         mean    22.536114    9.654971
+         std     11.287090    5.187216
+         min      8.250000    2.410000
+         25\%     12.635000    6.075000
+         50\%     20.340000    8.230000
+         75\%     30.200000   11.965000
+         max     50.730000   29.740000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}q9}
+         \PY{n}{countries}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{literacy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{phones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{regex} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}          literacy       phones
+         count  175.000000   175.000000
+         mean    82.182286   214.621143
+         std     20.086897   218.613971
+         min     17.600000     1.300000
+         25\%     69.950000    31.300000
+         50\%     92.000000   140.100000
+         75\%     98.000000   329.700000
+         max    100.000000  1035.600000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}q10}
+         \PY{n}{zeroCL} \PY{o}{=} \PY{n}{countries}\PY{p}{[}\PY{n}{countries}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coastline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{zeroCL\PYZus{}EU} \PY{o}{=} \PY{n}{zeroCL}\PY{p}{[}\PY{n}{zeroCL}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Europe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{zeroCL\PYZus{}EU}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 'Belarus'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}q11}
+         \PY{n}{zeroCL\PYZus{}AF} \PY{o}{=} \PY{n}{zeroCL}\PY{p}{[}\PY{n}{zeroCL}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Africa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{zeroCL\PYZus{}AF}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 'Chad'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}q12}
+         \PY{n}{zeroCL\PYZus{}SA} \PY{o}{=} \PY{n}{zeroCL}\PY{p}{[}\PY{n}{zeroCL}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{South America}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{zeroCL\PYZus{}SA}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 'Bolivia'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{HavFun}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{:}
+             \PY{n}{hav} \PY{o}{=} \PY{n+nb}{pow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{theta}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return} \PY{n}{hav}
+         
+         \PY{k}{def} \PY{n+nf}{HavDist}\PY{p}{(}\PY{n}{phi1}\PY{p}{,} \PY{n}{phi2}\PY{p}{,} \PY{n}{lambda1}\PY{p}{,} \PY{n}{lambda2}\PY{p}{,} \PY{n}{radius}\PY{p}{)}\PY{p}{:}
+             \PY{n}{right} \PY{o}{=} \PY{n}{HavFun}\PY{p}{(}\PY{n}{phi2} \PY{o}{\PYZhy{}} \PY{n}{phi1}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{phi1}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{phi2}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{HavFun}\PY{p}{(}\PY{n}{lambda2} \PY{o}{\PYZhy{}} \PY{n}{lambda1}\PY{p}{)}
+             \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{radius} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{arcsin}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{right}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{d}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}q13}
+         \PY{n}{radius} \PY{o}{=} \PY{l+m+mi}{3956}
+         \PY{n}{dist\PYZus{}q13} \PY{o}{=} \PY{n}{HavDist}\PY{p}{(}\PY{l+m+mf}{43.070231}\PY{p}{,} \PY{l+m+mf}{43.074645}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{89.411893}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{89.384113}\PY{p}{,} \PY{n}{radius}\PY{p}{)}
+         \PY{n}{dist\PYZus{}q13}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 1.4338994920734274
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{HavDist\PYZus{}Country}\PY{p}{(}\PY{n}{Country1}\PY{p}{,} \PY{n}{Country2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{radius} \PY{o}{=} \PY{l+m+mi}{3956}
+             \PY{n}{capital} \PY{o}{=} \PY{n}{capitals}\PY{p}{[}\PY{p}{(}\PY{n}{capitals}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{Country1}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{capitals}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{Country2}\PY{p}{)}\PY{p}{]}
+             \PY{n}{phi1}\PY{p}{,} \PY{n}{phi2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{capital}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{lambda1}\PY{p}{,} \PY{n}{lambda2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{capital}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{dist} \PY{o}{=} \PY{n}{HavDist}\PY{p}{(}\PY{n}{phi1}\PY{p}{,} \PY{n}{phi2}\PY{p}{,} \PY{n}{lambda1}\PY{p}{,} \PY{n}{lambda2}\PY{p}{,} \PY{n}{radius}\PY{p}{)}
+             \PY{k}{return} \PY{n}{dist}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}q14}
+         \PY{n}{dist\PYZus{}q14} \PY{o}{=} \PY{n}{HavDist\PYZus{}Country}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{India}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brazil}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{dist\PYZus{}q14}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 8840.574141306945
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}q15}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q15} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guyana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colombia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guyana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colombia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guyana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colombia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guyana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colombia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{!=} \PY{n}{j}\PY{p}{:}
+                     \PY{n}{Country\PYZus{}Contrasts\PYZus{}q15}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{HavDist\PYZus{}Country}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q15}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}             Chile   Guyana Colombia
+         Chile         NaN  2897.55  2636.64
+         Guyana    2897.55      NaN  1105.07
+         Colombia  2636.64  1105.07      NaN
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}q16}
+         \PY{n}{capitals\PYZus{}q16} \PY{o}{=} \PY{n}{countries}\PY{p}{[}\PY{n}{countries}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{South America}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{capitals}\PY{p}{[}\PY{n}{capitals}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{capitals\PYZus{}q16}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{capitals\PYZus{}q16}\PY{p}{,} 
+                                              \PY{n}{index} \PY{o}{=} \PY{n}{capitals\PYZus{}q16}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{capitals\PYZus{}q16}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{capitals\PYZus{}q16}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{!=} \PY{n}{j}\PY{p}{:}
+                     \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{HavDist\PYZus{}Country}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} country      Chile   Guyana Colombia Suriname   Brazil  Bolivia Venezuela  \textbackslash{}
+         country                                                                     
+         Chile          NaN  2897.55  2636.64  2895.81  1869.74  1180.74   3043.66   
+         Guyana     2897.55      NaN  1105.07  215.336  1709.07  1747.77    646.97   
+         Colombia   2636.64  1105.07      NaN  1303.41  2275.52  1512.12   639.361   
+         Suriname   2895.81  215.336  1303.41      NaN  1572.67  1778.77   861.457   
+         Brazil     1869.74  1709.07  2275.52  1572.67      NaN   1342.3   2228.69   
+         Bolivia    1180.74  1747.77  1512.12  1778.77   1342.3      NaN   1865.13   
+         Venezuela  3043.66   646.97  639.361  861.457  2228.69  1865.13       NaN   
+         Argentina  690.784  2857.52  2885.36  2799.89  1459.14  1379.46   3157.62   
+         Peru       1531.48  1837.86  1167.51  1944.75  1967.77  669.926   1705.42   
+         Ecuador    2350.21  1483.19  451.004   1661.7  2344.58  1326.76   1088.06   
+         Uruguay    833.403  2878.64  2962.23  2809.74   1412.1  1467.25   3207.35   
+         Paraguay   963.636  2214.29  2337.62  2153.86  908.186  906.799    2544.8   
+         
+         country   Argentina     Peru  Ecuador  Uruguay Paraguay  
+         country                                                  
+         Chile       690.784  1531.48  2350.21  833.403  963.636  
+         Guyana      2857.52  1837.86  1483.19  2878.64  2214.29  
+         Colombia    2885.36  1167.51  451.004  2962.23  2337.62  
+         Suriname    2799.89  1944.75   1661.7  2809.74  2153.86  
+         Brazil      1459.14  1967.77  2344.58   1412.1  908.186  
+         Bolivia     1379.46  669.926  1326.76  1467.25  906.799  
+         Venezuela   3157.62  1705.42  1088.06  3207.35   2544.8  
+         Argentina       NaN  1936.47  2696.15   143.07  646.036  
+         Peru        1936.47      NaN  823.054  2046.57  1558.64  
+         Ecuador     2696.15  823.054      NaN   2791.2  2218.65  
+         Uruguay      143.07  2046.57   2791.2      NaN  667.699  
+         Paraguay    646.036  1558.64  2218.65  667.699      NaN  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}q17}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 'Bolivia'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}q18}
+         \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 'Uruguay'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}q19}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q19} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q19} \PY{o}{=} \PY{n}{Country\PYZus{}Nearest\PYZus{}q19}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{distance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{columns}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q19}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}              nearest distance
+         country                      
+         Chile      Argentina  690.784
+         Guyana      Suriname  215.336
+         Colombia     Ecuador  451.004
+         Suriname      Guyana  215.336
+         Brazil      Paraguay  908.186
+         Bolivia         Peru  669.926
+         Venezuela   Colombia  639.361
+         Argentina    Uruguay   143.07
+         Peru         Bolivia  669.926
+         Ecuador     Colombia  451.004
+         Uruguay    Argentina   143.07
+         Paraguay   Argentina  646.036
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}q20}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q20} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{Country\PYZus{}Contrasts\PYZus{}q16}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q20} \PY{o}{=} \PY{n}{Country\PYZus{}Nearest\PYZus{}q20}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{furthest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{distance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{columns}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Country\PYZus{}Nearest\PYZus{}q20}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}             furthest distance
+         country                      
+         Chile      Venezuela  3043.66
+         Guyana         Chile  2897.55
+         Colombia     Uruguay  2962.23
+         Suriname       Chile  2895.81
+         Brazil       Ecuador  2344.58
+         Bolivia    Venezuela  1865.13
+         Venezuela    Uruguay  3207.35
+         Argentina  Venezuela  3157.62
+         Peru         Uruguay  2046.57
+         Ecuador      Uruguay   2791.2
+         Uruguay    Venezuela  3207.35
+         Paraguay   Venezuela   2544.8
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{conn} \PY{o}{=} \PY{n}{sqlite3}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{countries.db}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{countries}\PY{o}{.}\PY{n}{to\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{,} \PY{n}{if\PYZus{}exists}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{replace}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{capitals}\PY{o}{.}\PY{n}{to\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{capitals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{,} \PY{n}{if\PYZus{}exists}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{replace}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}q21}
+         \PY{n}{countries\PYZus{}q21} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select continent, count() as ` number of countries ` from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group by continent }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by count() asc, continent asc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q21}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}        continent   number of countries 
+         0      Australia                     12
+         1  South America                     12
+         2  North America                     24
+         3           Asia                     38
+         4         Europe                     41
+         5         Africa                     48
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}q22}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{font.size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{16}
+         \PY{n}{plot\PYZus{}q22} \PY{o}{=} \PY{n}{countries\PYZus{}q21}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{legend} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q22}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{number of Countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q22}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q22}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{countries\PYZus{}q21}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} [Text(0,0,'Australia'),
+          Text(0,0,'South America'),
+          Text(0,0,'North America'),
+          Text(0,0,'Asia'),
+          Text(0,0,'Europe'),
+          Text(0,0,'Africa')]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}q23}
+         \PY{n}{countries\PYZus{}q23} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select continent, sum(population) as `total population (million)` from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group by continent }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by `total population (million)` desc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q23}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total population (million)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{countries\PYZus{}q23}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total population (million)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{1000000}
+         \PY{n}{countries\PYZus{}q23}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}        continent  total population (million)
+         0           Asia                 3739.902863
+         1         Africa                  824.954038
+         2         Europe                  792.053486
+         3  North America                  515.041558
+         4  South America                  375.441666
+         5      Australia                   32.163025
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}q24}
+         \PY{n}{plot\PYZus{}q24} \PY{o}{=} \PY{n}{countries\PYZus{}q23}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{legend} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q24}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total population (million)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q24}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q24}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{countries\PYZus{}q23}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} [Text(0,0,'Asia'),
+          Text(0,0,'Africa'),
+          Text(0,0,'Europe'),
+          Text(0,0,'North America'),
+          Text(0,0,'South America'),
+          Text(0,0,'Australia')]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}q25}
+         \PY{n}{countries\PYZus{}q25} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select country, population from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where continent = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Australia}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by population desc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q25}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}              country  population
+         0          Australia    20264082
+         1   Papua New Guinea     5670544
+         2        New Zealand     4076140
+         3               Fiji      905949
+         4   French Polynesia      274578
+         5      New Caledonia      219246
+         6            Vanuatu      208869
+         7              Samoa      176908
+         8               Guam      171019
+         9              Tonga      114689
+         10  Marshall Islands       60422
+         11             Palau       20579
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}q26}
+         \PY{n}{countries\PYZus{}q26} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select country, population * `gdp\PYZhy{}per\PYZhy{}capita` as `real GDP (billion)` from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} 
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by `real GDP (billion)` DESC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q26}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{real GDP (billion)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{countries\PYZus{}q26}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{real GDP (billion)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{1000000000}
+         \PY{n}{countries\PYZus{}q26}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}           country  real GDP (billion)
+         0   United States        11281.191327
+         1           China         6569.868565
+         2           Japan         3594.473830
+         3           India         3176.520785
+         4         Germany         2274.855452
+         5          France         1680.181354
+         6  United Kingdom         1678.873538
+         7           Italy         1552.164690
+         8          Brazil         1429.394525
+         9          Russia         1271.752506
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}q27}
+         \PY{n}{countries\PYZus{}q27} \PY{o}{=} \PY{n}{countries\PYZus{}q26}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q27\PYZus{}plot} \PY{o}{=} \PY{n}{countries\PYZus{}q27}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{real GDP (billion)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{countries\PYZus{}q27\PYZus{}plot}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{countries\PYZus{}q27}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{countries\PYZus{}q27\PYZus{}plot}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GDP Breakdown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x117d8bb38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}q28}
+         \PY{n}{countries\PYZus{}q28} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select country, `birth\PYZhy{}rate`, `death\PYZhy{}rate` from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} 
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by `birth\PYZhy{}rate` \PYZhy{} `death\PYZhy{}rate` DESC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q28}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}         country  birth-rate  death-rate
+         0        Uganda       47.35       12.24
+         1         Yemen       42.89        8.30
+         2          Mali       49.82       16.89
+         3          Oman       36.24        3.81
+         4    Madagascar       41.41       11.11
+         5  Burkina Faso       45.62       15.60
+         6         Niger       50.73       20.91
+         7          Chad       45.73       16.38
+         8    Mauritania       40.99       12.16
+         9       Burundi       42.22       13.46
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}q29}
+         \PY{n}{countries\PYZus{}q29} \PY{o}{=} \PY{n}{countries\PYZus{}q28}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q29}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{countries\PYZus{}q29}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plot\PYZus{}q29} \PY{o}{=} \PY{n}{countries\PYZus{}q29}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{death\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{birth\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q29}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q29}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} Text(0.5,0,'rate')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}q30}
+         \PY{n}{countries\PYZus{}q30} \PY{o}{=} \PY{n}{countries\PYZus{}q28}
+         \PY{n}{plot\PYZus{}q30} \PY{o}{=} \PY{n}{countries\PYZus{}q30}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{death\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{birth\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q30}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x117e8bb38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}q31}
+         \PY{n}{countries\PYZus{}q31} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select country, `birth\PYZhy{}rate`, `death\PYZhy{}rate` from countries }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where `death\PYZhy{}rate` \PYZgt{} 17 AND `birth\PYZhy{}rate` \PYZlt{} 30 }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{order by `birth\PYZhy{}rate`}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{countries\PYZus{}q31}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}         country  birth-rate  death-rate
+         0  South Africa       18.20       22.00
+         1      Botswana       23.08       29.50
+         2       Namibia       24.32       18.86
+         3       Lesotho       24.75       28.71
+         4     Swaziland       27.41       29.74
+         5      Zimbabwe       28.01       21.84
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{}q32}
+         \PY{n}{countries\PYZus{}q30}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 0.40037782919521714
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{}q33}
+         \PY{n}{countries\PYZus{}q33} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select `infant\PYZhy{}mortality`, `birth\PYZhy{}rate` from countries }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q33} \PY{o}{=} \PY{n}{countries\PYZus{}q33}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{birth\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{infant\PYZhy{}mortality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{}q34}
+         \PY{n}{countries\PYZus{}q33}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} 0.8687265678031416
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{}q35}
+         \PY{n}{countries\PYZus{}q35} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select `GDP\PYZhy{}per\PYZhy{}capita`, `death\PYZhy{}rate` from countries }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q35} \PY{o}{=} \PY{n}{countries\PYZus{}q35}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{death\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{}q36}
+         \PY{n}{countries\PYZus{}q35}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} -0.20995846867456752
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{}q37}
+         \PY{n}{countries\PYZus{}q37} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select `GDP\PYZhy{}per\PYZhy{}capita`, `birth\PYZhy{}rate` from countries }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q37} \PY{o}{=} \PY{n}{countries\PYZus{}q37}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{birth\PYZhy{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}q38}
+         \PY{n}{countries\PYZus{}q38} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select `GDP\PYZhy{}per\PYZhy{}capita`, 1 / `birth\PYZhy{}rate` as inverse from countries }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{)}
+         \PY{n}{plot\PYZus{}q38} \PY{o}{=} \PY{n}{countries\PYZus{}q38}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inverse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{countries\PYZus{}q38}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{res} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inverse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} res is a tuple: (COEFFICIENTS, VALUE, VALUE, VALUE)}
+         \PY{n}{coefficients} \PY{o}{=} \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} coefficients is (m,n:}
+         \PY{n}{m} \PY{o}{=} \PY{n}{coefficients}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} slope}
+         \PY{n}{n} \PY{o}{=} \PY{n}{coefficients}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} intercept}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}q39}
+         \PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} (1.8422394400496355e-06, 0.03903504364953538)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}q40}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inverse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{*} \PY{n}{m} \PY{o}{+} \PY{n}{n}
+         \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZhy{}per\PYZhy{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1182f5f98>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{conn}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
